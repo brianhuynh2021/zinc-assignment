@@ -1,0 +1,37 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+*.log
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# Virtual environments
+venv/
+env/
+
+# VSCode & MacOS
+.vscode/
+.DS_Store
+
+# Docker
+.dockerignore
+
+# Environment files
+.env
+
+# Unit test cache
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+pytest_cache/
+
+# Migrations (optional)
+**/migrations/*.py
+**/migrations/__pycache__/
