@@ -64,6 +64,12 @@ class ImportSalesView(APIView):
 
 class RevenueMetricsView(APIView):
     def get(self, request):
+        """
+            Returns total revenue and average order value.
+            Query params:
+            - start: YYYY-MM-DD
+            - end: YYYY-MM-DD
+        """
         start = parse_date(request.GET.get('start'))
         end = parse_date(request.GET.get('end'))
 
