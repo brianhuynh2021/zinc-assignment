@@ -8,7 +8,7 @@
 
 ## 1. High-Level Architecture Diagram
 
-![Architecture Diagram](zinc_architecture_diagram.png)
+![Architecture Diagram](Zinc_architec.png)
 
 - The user triggers ingestion from a CSV file.
 - Django reads the CSV and stores data in SQLite.

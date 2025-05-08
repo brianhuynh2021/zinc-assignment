@@ -45,7 +45,7 @@ docker build -t zinc-app .
 docker run -p 8000:8000 zinc-app
 ```
 
-Then visit: [http://localhost:8000](
+Then visit: [http://localhost:8000](http://localhost:8000)
 
 ---
 
