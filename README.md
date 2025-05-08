@@ -4,7 +4,7 @@
 --------------------------------------------------------
 I - Run Locally (without Docker)
 	1.	Clone the repo and install dependencies:
-            git clone https://github.com/YOUR_USERNAME/zinc-assignment.git
+            https://github.com/brianhuynh2021/zinc-assignment.git
             cd zinc-assignment
             python3 -m venv venv
             source venv/bin/activate
