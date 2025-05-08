@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(pgp=0_%%3pz9lnjo5rwval*78_nu!l&v@@!+vov#^qp+dg5l#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'zinc_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / "data" / "db.sqlite3",
     }
 }
 
@@ -141,7 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = BASE_DIR / 'static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

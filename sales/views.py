@@ -20,6 +20,11 @@ class HealthCheckView(APIView):
                 cursor.execute("SELECT 1")
                 result = cursor.fetchone()
                 if result == (1,):
+                    logger.info("Good health check", extra={
+                    'endpoint': '/api/health/',
+                    'params': request.query_params.dict(),
+                    'request_id': getattr(request, 'request_id', 'N/A')
+                })
                     return Response({"status": "ok", "database": "reachable"}, status=200)
         except Exception as e:
             logger.error("Health check FAILED", extra={

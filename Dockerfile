@@ -1,18 +1,21 @@
 FROM python:3.10-slim
 
-# Set work directory
+RUN pip install --no-cache-dir gunicorn
+
 WORKDIR /app
 
-# Create a non-root user
-RUN adduser --disabled-password appuser
-USER appuser
-
-# Copy source and install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Expose port 8000 and run Gunicorn
+RUN python manage.py collectstatic --noinput
+RUN adduser --disabled-password appuser
+
+RUN mkdir -p /app/data && chown -R appuser:appuser /app/data
+
+USER appuser
+
 EXPOSE 8000
-CMD ["gunicorn", "zinc_project.wsgi:application", "--bind", "0.0.0.0:8000"]
+
+CMD ["sh", "-c", "python manage.py migrate && gunicorn zinc_project.wsgi:application --bind 0.0.0.0:8000"]

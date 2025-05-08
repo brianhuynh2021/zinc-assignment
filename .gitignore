@@ -35,3 +35,4 @@ pytest_cache/
 # Migrations (optional)
 **/migrations/*.py
 **/migrations/__pycache__/
+data/
