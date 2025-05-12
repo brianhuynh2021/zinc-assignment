@@ -46,7 +46,6 @@ docker run -p 8000:8000 zinc-app
 ```
 
 Then visit: [http://localhost:8000](http://localhost:8000)
-OR testing directly on EC2 service via: http://44.223.61.228:8000
 ---
 
 ## III. Run Tests
