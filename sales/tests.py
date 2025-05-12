@@ -33,7 +33,7 @@ class SalesEndpointTests(TestCase):
         self.assertEqual(data[1]['revenue_sgd'], 25.0)
 
     def test_import_sales(self):
-        # Temporarily copy sales.csv into a test location if needed
+
         response = self.client.get('/api/import-sales/')
         self.assertEqual(response.status_code, 201)
         self.assertIn('imported_rows', response.json())
