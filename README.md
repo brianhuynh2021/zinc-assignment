@@ -76,3 +76,6 @@ python manage.py test
 - Gunicorn  
 - GitHub Actions CI  
 - Structured Logging (`python-json-logger`)
+
+
+Access EC2: ssh -i zinc-sales.pem ubuntu@44.223.61.228

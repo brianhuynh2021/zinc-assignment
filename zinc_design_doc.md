@@ -91,3 +91,91 @@ class Sale(models.Model):
 | CI             | GitHub Actions only               | No deploy, just build/test|
 | Logging        | Custom middleware                 | More setup, more control  |
 
+
+
+---
+
+### 1. Component Overview (Based on Visual Flow)
+
+```
+[CSV File] → [API] → [Stateless Web Servers] → [Database (PostgreSQL)]
+                                ↓
+                             [GitHub]
+                                ↓
+                          [GitHub Actions CI/CD]
+                                ↓
+                       [Docker Build + Deploy]
+                                ↓
+        ┌────────────────────────────────────────────────────────┐
+        │                 Scalable Infrastructure               │
+        └────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 2. Data Flow Breakdown
+
+**1. CSV Ingest:**
+
+* User submits a CSV file (e.g., sales data).
+* File is ingested via `/api/import-sales/` endpoint exposed by the API layer.
+
+**2. API Layer:**
+
+* Handles endpoints:
+
+  * `/api/import-sales/`
+  * `/api/metrics/revenue/`
+  * `/api/metrics/revenue/daily/`
+  * `/api/healthcheck/`
+* API runs as a Django REST Framework application deployed on stateless servers.
+
+**3. Backend Stateless Web Servers:**
+
+* Horizontal scaling supported via load balancer.
+* Deployed using Docker containers.
+* Stateless design allows multiple instances.
+
+**4. Database Layer:**
+
+* PostgreSQL (production-grade) with support for:
+
+  * Sharding (horizontal scaling by user/region)
+  * Replication (read scalability)
+  * Failover (availability across data centers)
+
+**5. CI/CD Flow:**
+
+* Developers push code to GitHub.
+* GitHub Actions performs:
+
+  * Linting, testing, migration checks
+  * Docker image build
+* Artifact deployed to EC2 (or ECS/Kubernetes in the future)
+
+**6. Message Queue (Optional for scaling):**
+
+* For large file ingestion, rows are enqueued to a queue (e.g., RabbitMQ/SQS).
+* Worker services asynchronously process and save rows.
+
+**7. CDN & Static Content (Optional):**
+
+* Frontend assets or dashboards served through CDN.
+* Enhances global performance and reduces backend load.
+
+---
+
+### 3. Resilience & Scalability Diagram Highlights
+
+* **Load Balancer** distributes API traffic.
+* **Multiple Web Servers** ensure horizontal scaling.
+* **Master DB with Shards** ensures write scalability.
+* **Read Replicas** handle read-heavy analytics endpoints.
+* **Failover to Data Center 2** ensures high availability.
+* **Message Queue** decouples ingestion from compute.
+
+---
+
+### 4. Summary
+
+This infrastructure transitions the Zinc assignment from a single-user local Django project to a robust, scalable system supporting high traffic, asynchronous data processing, and resilient deployment through CI/CD and cloud infrastructure.
